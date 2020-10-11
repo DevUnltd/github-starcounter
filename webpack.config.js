@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const PrettierPlugin = require("prettier-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const getPackageJson = require('./scripts/getPackageJson');
 
 const {
@@ -28,7 +29,7 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'build'),
-    library: 'MyLibrary',
+    library: 'Starcounter',
     libraryTarget: 'umd'
   },
   module: {
@@ -52,6 +53,12 @@ module.exports = {
   },
   plugins: [
     new PrettierPlugin(),
-    new webpack.BannerPlugin(banner)
+    new webpack.BannerPlugin(banner),
+    new CopyWebpackPlugin([
+      {
+        from: `./build/index.js`,
+        to: `../docs/dist.js`
+      }
+    ]),
   ]
 };

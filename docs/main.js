@@ -1,6 +1,6 @@
-let MyLibrary = window.MyLibrary.default;
-let myLibraryInstance = new MyLibrary();
+let Starcounter = window.Starcounter.default;
+let StarcounterInstance = new Starcounter();
 
-console.log("myLibraryInstance", myLibraryInstance);
+console.log("StarcounterInstance", StarcounterInstance);
 
-myLibraryInstance.myMethod();
+StarcounterInstance.myMethod();
