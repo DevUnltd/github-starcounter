@@ -1,6 +1,6 @@
 /*!
  * 
- *   github-starcounter v1.0.0
+ *   github-starcounter v1.0.1
  *   https://github.com/DevUnltd/github-starcounter
  *
  *   Copyright (c) Francisco Hodge (https://github.com/hodgef)
