@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const PrettierPlugin = require("prettier-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const getPackageJson = require('./scripts/getPackageJson');
 
 const {
@@ -31,6 +32,12 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     library: 'Starcounter',
     libraryTarget: 'umd'
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({
+      extractComments: false
+    })],
   },
   module: {
     rules: [
