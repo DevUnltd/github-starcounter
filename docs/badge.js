@@ -5,8 +5,6 @@ const showButton = urlParams.get('button');
 const showStargazers = urlParams.get('stargazers');
 
 const Starcounter = window.Starcounter.default;
-const StarcounterInstance = new Starcounter({
+new Starcounter({
     user, repo, showButton, showStargazers
 });
-
-console.log("StarcounterInstance", StarcounterInstance);
