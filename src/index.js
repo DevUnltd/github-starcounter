@@ -73,13 +73,13 @@ class Starcounter {
     avatarContainerElem.className = "du-stargazer-container";
 
     recentStargazers.forEach((stargazer) => {
-      const { html_url, avatar_url, login } = stargazer;
+      const { /*html_url, */ avatar_url, login } = stargazer;
       const avatarElem = document.createElement("a");
       avatarElem.className = "du-stargazer";
       avatarElem.style.backgroundImage = `url('${avatar_url}')`;
-      avatarElem.setAttribute("href", html_url);
       avatarElem.setAttribute("target", "_blank");
-      avatarElem.setAttribute("title", login);
+      avatarElem.setAttribute("href", this.stargazersUrl);
+      avatarElem.setAttribute("title", `${login} supports ${this.repo}`);
       avatarContainerElem.appendChild(avatarElem);
     });
 
