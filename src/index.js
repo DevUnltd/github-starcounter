@@ -88,7 +88,7 @@ class Starcounter {
       lastStargazer.login
     }</a> and ${(this.stargazers_count - 1).toLocaleString(
       "en-US"
-    )} others have starred <a href="${this.repoUrl}" target="_blank">${
+    )} others have starred <a href="${this.stargazersUrl}" target="_blank">${
       this.repo
     }</a>.
     `;
