@@ -1,6 +1,6 @@
 {
   "name": "github-starcounter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Give a shout-out to your Stargazers and proudly display their support",
   "main": "build/index.js",
   "scripts": {
