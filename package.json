@@ -1,10 +1,10 @@
 {
   "name": "github-starcounter",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "description": "Give a shout-out to your Stargazers and proudly display their support",
   "main": "build/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && node scripts/afterBuild.js",
     "test": "jest",
     "prepare": "npm run build",
     "trypublish": "npm publish || true"
@@ -34,10 +34,10 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-preset-minify": "^0.5.0",
-    "copy-webpack-plugin": "^5.1.2",
     "css-loader": "^4.3.0",
     "eslint": "^7.11.0",
     "file-loader": "^6.1.1",
+    "fs-extra": "^9.0.1",
     "jest": "^26.5.2",
     "prettier": "^2.1.2",
     "prettier-webpack-plugin": "^1.2.0",
