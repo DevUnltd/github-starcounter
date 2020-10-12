@@ -1,19 +1,64 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
+.github-starcounter {
   font-family: sans-serif;
-  height: 100%;
 }
 
-h1 {
-  margin: 0;
-  font-weight: 300;
-}
-
-#root {
-  background: url("image.png") no-repeat 98% 2%;
-  padding: 20px;
-  height: 100%;
+.github-starcounter .du-button {
+  background: url("images/github-icon.png") no-repeat 15px center;
+  height: 45px;
   box-sizing: border-box;
+  display: inline-flex;
+  background-size: 20px;
+  padding-left: 45px;
+  padding-right: 15px;
+  align-items: center;
+  border-radius: 20px;
+  font-size: 21px;
+  border: 1px solid #c5c5c5;
+  text-decoration: none;
+  color: black;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.github-starcounter .du-button:hover {
+  opacity: 0.5;
+}
+
+.github-starcounter .du-stargazers {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.github-starcounter .du-stargazer-container {
+  margin-right: 10px;
+}
+
+.github-starcounter .du-stargazer {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  border-radius: 50%;
+  background-size: cover;
+  border: 2px solid #ffffff;
+  transition: margin-left 0.3s ease-in-out, opacity 0.2s ease-in-out;
+  position: relative;
+}
+
+.github-starcounter .du-stargazer:nth-child(n + 2) {
+  margin-left: -10px;
+}
+
+.github-starcounter
+  .du-stargazer-container:hover
+  .du-stargazer:nth-child(n + 2) {
+  margin-left: -5px !important;
+}
+
+.github-starcounter .du-stargazer-container:hover .du-stargazer {
+  opacity: 0.8;
+}
+
+.github-starcounter .du-stargazer:hover {
+  opacity: 1 !important;
+  z-index: 5;
 }
