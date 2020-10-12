@@ -9,6 +9,7 @@ class Starcounter {
     this.wrapperElem = document.querySelector(".github-starcounter");
     this.endpoint = `https://api.github.com/repos/${this.user}/${this.repo}`;
     this.stargazersUrl = `https://github.com/${this.user}/${this.repo}/stargazers`;
+    this.repoUrl = `https://github.com/${this.user}/${this.repo}`;
     this.render();
   }
 
@@ -87,7 +88,9 @@ class Starcounter {
       lastStargazer.login
     }</a> and ${(this.stargazers_count - 1).toLocaleString(
       "en-US"
-    )} others have starred this.
+    )} others have starred <a href="${this.repoUrl}" target="_blank">${
+      this.repo
+    }</a>.
     `;
 
     stargazersElem.appendChild(stargazersTextElem);
