@@ -62,3 +62,22 @@
   opacity: 1 !important;
   z-index: 5;
 }
+
+/**
+ * Theme: Inline
+ */
+.github-starcounter.du-theme-inline {
+  align-items: center;
+  display: flex;
+}
+
+.github-starcounter.du-theme-inline .du-stargazer-container + div {
+  display: none;
+}
+
+.github-starcounter.du-theme-inline .du-stargazers {
+  margin-top: 0;
+  margin-left: 8px;
+}
+
+/** **/

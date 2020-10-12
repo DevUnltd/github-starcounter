@@ -1,11 +1,12 @@
 import "./index.css";
 
 class Starcounter {
-  constructor({ showBtn, showStargazers, user, repo }) {
+  constructor({ showBtn, showStargazers, user, repo, theme }) {
     this.user = user;
     this.repo = repo;
     this.showBtn = showBtn === "false" ? false : true;
     this.showStargazers = showStargazers === "true";
+    this.theme = theme;
     this.wrapperElem = document.querySelector(".github-starcounter");
     this.endpoint = `https://api.github.com/repos/${this.user}/${this.repo}`;
     this.stargazersUrl = `https://github.com/${this.user}/${this.repo}/stargazers`;
@@ -24,6 +25,10 @@ class Starcounter {
   };
 
   render = async () => {
+    if (this.theme) {
+      this.wrapperElem.classList.add("du-theme-" + this.theme);
+    }
+
     if (this.showBtn) {
       this.renderButton();
     }
@@ -48,7 +53,7 @@ class Starcounter {
     if (!stargazers_count) return;
     this.stargazers_count = stargazers_count;
 
-    if (this.stargazers_count < 2) return;
+    if (this.stargazers_count < 5) return;
 
     const lastPageIdx = Math.ceil(this.stargazers_count / 100);
     if (typeof lastPageIdx === "undefined") return;
@@ -81,17 +86,25 @@ class Starcounter {
     stargazersElem.appendChild(avatarContainerElem);
 
     const stargazersTextElem = document.createElement("div");
-    stargazersTextElem.innerHTML = `
-      <a href="${
-        lastStargazer.html_url
-      }" target="_blank" class="du-user-showcase">${
-      lastStargazer.login
-    }</a> and ${(this.stargazers_count - 1).toLocaleString(
-      "en-US"
-    )} others have starred <a href="${this.stargazersUrl}" target="_blank">${
-      this.repo
-    }</a>.
-    `;
+    stargazersTextElem.className = "du-stargazers-text";
+
+    if (this.theme === "inline") {
+      stargazersTextElem.innerHTML = `
+        +${(this.stargazers_count - 3).toLocaleString("en-US")}
+      `;
+    } else {
+      stargazersTextElem.innerHTML = `
+        <a href="${
+          lastStargazer.html_url
+        }" target="_blank" class="du-user-showcase">${
+        lastStargazer.login
+      }</a> and ${(this.stargazers_count - 1).toLocaleString(
+        "en-US"
+      )} others have starred <a href="${this.stargazersUrl}" target="_blank">${
+        this.repo
+      }</a>.
+      `;
+    }
 
     stargazersElem.appendChild(stargazersTextElem);
     this.wrapperElem.appendChild(stargazersElem);
