@@ -35,9 +35,12 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin({
-      extractComments: false
-    })],
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false
+      }),
+      new webpack.BannerPlugin(banner)
+    ],
   },
   module: {
     rules: [
@@ -59,13 +62,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new PrettierPlugin(),
-    new webpack.BannerPlugin(banner),
     new CopyWebpackPlugin([
       {
         from: `./build/index.js`,
         to: `../docs/dist.js`
       }
     ]),
+    new PrettierPlugin(),
   ]
 };
