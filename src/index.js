@@ -32,7 +32,6 @@ class Starcounter {
 
     if (this.showStargazers || this.showButtonCount) {
       const { stargazers_count } = await this.getApi();
-      if (!stargazers_count) return;
       this.stargazers_count = stargazers_count;
     }
 
@@ -51,7 +50,7 @@ class Starcounter {
     buttonElem.setAttribute("href", this.stargazersUrl);
     buttonElem.setAttribute("target", "_blank");
 
-    if (this.showButtonCount) {
+    if (this.showButtonCount && this.stargazers_count) {
       buttonElem.classList.add("show-count");
       buttonElem.innerHTML = `
         <span class="du-star-span">Star</span>
