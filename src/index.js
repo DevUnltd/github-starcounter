@@ -1,11 +1,12 @@
 import "./index.css";
 
 class Starcounter {
-  constructor({ showBtn, showStargazers, user, repo, theme }) {
+  constructor({ showBtn, showStargazers, showButtonCount, user, repo, theme }) {
     this.user = user;
     this.repo = repo;
     this.showBtn = showBtn === "false" ? false : true;
     this.showStargazers = showStargazers === "true";
+    this.showButtonCount = showButtonCount === "true";
     this.theme = theme;
     this.wrapperElem = document.querySelector(".github-starcounter");
     this.endpoint = `https://api.github.com/repos/${this.user}/${this.repo}`;
@@ -29,6 +30,12 @@ class Starcounter {
       this.wrapperElem.classList.add("du-theme-" + this.theme);
     }
 
+    if (this.showStargazers || this.showButtonCount) {
+      const { stargazers_count } = await this.getApi();
+      if (!stargazers_count) return;
+      this.stargazers_count = stargazers_count;
+    }
+
     if (this.showBtn) {
       this.renderButton();
     }
@@ -41,18 +48,25 @@ class Starcounter {
   renderButton = () => {
     const buttonElem = document.createElement("a");
     buttonElem.className = "du-button";
-    buttonElem.innerHTML = "Star";
     buttonElem.setAttribute("href", this.stargazersUrl);
     buttonElem.setAttribute("target", "_blank");
-    //buttonElem.innerHTML = this.stargazers_count.toLocaleString("en-US");
+
+    if (this.showButtonCount) {
+      buttonElem.classList.add("show-count");
+      buttonElem.innerHTML = `
+        <span class="du-star-span">Star</span>
+        <span class="du-count-span">${this.stargazers_count.toLocaleString(
+          "en-US"
+        )}</span>
+      `;
+    } else {
+      buttonElem.innerHTML = "Star";
+    }
+
     this.wrapperElem.appendChild(buttonElem);
   };
 
   renderStargazers = async () => {
-    const { stargazers_count } = await this.getApi();
-    if (!stargazers_count) return;
-    this.stargazers_count = stargazers_count;
-
     if (this.stargazers_count < 5) return;
 
     const lastPageIdx = Math.ceil(this.stargazers_count / 100);

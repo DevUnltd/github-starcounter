@@ -63,6 +63,12 @@
   z-index: 5;
 }
 
+.github-starcounter span.du-count-span {
+  border-left: 1px solid #c5c5c5;
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
 /**
  * Theme: Inline
  */
