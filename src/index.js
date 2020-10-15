@@ -32,8 +32,8 @@ class Starcounter {
     }
 
     //if (this.showStargazers || this.showButtonCount) {
-      const { stargazers_count } = await this.getApi();
-      this.stargazers_count = stargazers_count;
+    const { stargazers_count } = await this.getApi();
+    this.stargazers_count = stargazers_count;
     //}
 
     if (this.showBtn) {
