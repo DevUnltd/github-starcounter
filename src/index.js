@@ -31,10 +31,10 @@ class Starcounter {
       this.wrapperElem.classList.add("du-theme-" + this.theme);
     }
 
-    if (this.showStargazers || this.showButtonCount) {
+    //if (this.showStargazers || this.showButtonCount) {
       const { stargazers_count } = await this.getApi();
       this.stargazers_count = stargazers_count;
-    }
+    //}
 
     if (this.showBtn) {
       this.renderButton();
