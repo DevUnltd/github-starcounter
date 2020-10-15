@@ -18,11 +18,22 @@ class Starcounter {
   getApi = (path = "") => {
     return new Promise((resolve) => {
       fetch(this.endpoint + path)
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(
+              "Could not reach the Github API. Please try again later"
+            );
+          }
+        })
         .then((data = {}) => {
           resolve(data);
         })
-        .catch((reason) => console.log(reason));
+        .catch((reason) => {
+          resolve({});
+          console.log(reason);
+        });
     });
   };
 
