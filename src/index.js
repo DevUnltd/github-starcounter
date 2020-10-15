@@ -21,7 +21,8 @@ class Starcounter {
         .then((response) => response.json())
         .then((data = {}) => {
           resolve(data);
-        });
+        })
+        .catch((reason) => console.log(reason));
     });
   };
 
@@ -47,7 +48,10 @@ class Starcounter {
   renderButton = () => {
     const buttonElem = document.createElement("a");
     buttonElem.className = "du-button";
-    buttonElem.setAttribute("href", this.stargazersUrl);
+    buttonElem.setAttribute(
+      "href",
+      this.stargazers_count ? this.stargazersUrl : this.repoUrl
+    );
     buttonElem.setAttribute("target", "_blank");
 
     if (this.showButtonCount && this.stargazers_count) {
