@@ -21,7 +21,7 @@
   </a>
 </p>
 
-<blockquote>Give a shout-out to your Stargazers and proudly display their support with these custom Github Star buttons.</blockquote>
+<blockquote align="center">Give a shout-out to your Stargazers and proudly display their support with these custom Github Star buttons.</blockquote>
 
 ## Usage 🚀 
 [Quick Start - Documentation](https://hodgef.com/github-starcounter/)
