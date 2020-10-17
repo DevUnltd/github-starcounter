@@ -1,10 +1,9 @@
- <p>
+ <p align="center">
   <a href="https://hodgef.com/github-starcounter">
-	  <img alt="Github Stargazers Counter" src="https://i.imgur.com/UpxMBu7.png">
+	  <img alt="Github Stargazers Counter" src="https://i.imgur.com/0JDVXGB.png">
   </a>
- </p>
-  <p>
-	
+	</p>
+	 <p align="center">
   <a href="https://www.npmjs.com/package/github-starcounter">
     <img src="https://badgen.net/npm/v/github-starcounter?color=blue" alt="npm version">
   </a>
