@@ -40,6 +40,7 @@
   border-radius: 50%;
   background-size: cover;
   border: 2px solid #ffffff;
+  background-color: white;
   transition: margin-left 0.3s ease-in-out, opacity 0.2s ease-in-out;
   position: relative;
 }
