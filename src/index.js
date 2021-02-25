@@ -1,13 +1,23 @@
 import "./index.css";
 
 class Starcounter {
-  constructor({ showBtn, showStargazers, showButtonCount, user, repo, theme }) {
+  constructor({
+    showBtn,
+    showStargazers,
+    showButtonCount,
+    user,
+    repo,
+    theme,
+    nbItems = 3,
+  }) {
     this.user = user;
     this.repo = repo;
     this.showBtn = showBtn === "false" ? false : true;
     this.showStargazers = showStargazers === "true";
     this.showButtonCount = showButtonCount === "true";
     this.theme = theme;
+    this.nbItems = nbItems > 0 && nbItems < 50 ? nbItems : 3;
+
     this.wrapperElem = document.querySelector(".github-starcounter");
     this.endpoint = `https://api.github.com/repos/${this.user}/${this.repo}`;
     this.stargazersUrl = `https://github.com/${this.user}/${this.repo}/stargazers`;
@@ -91,7 +101,9 @@ class Starcounter {
     );
     if (!(Array.isArray(users) && users.length)) return;
 
-    const recentStargazers = users.slice(Math.max(users.length - 3, 1));
+    const recentStargazers = users.slice(
+      Math.max(users.length - this.nbItems, 1)
+    );
     const lastStargazer = recentStargazers[recentStargazers.length - 1];
 
     const stargazersElem = document.createElement("div");
@@ -118,7 +130,7 @@ class Starcounter {
 
     if (this.theme === "inline") {
       stargazersTextElem.innerHTML = `
-        +${(this.stargazers_count - 3).toLocaleString("en-US")}
+        +${(this.stargazers_count - this.nbItems).toLocaleString("en-US")}
       `;
     } else {
       stargazersTextElem.innerHTML = `
