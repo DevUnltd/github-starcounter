@@ -1,11 +1,16 @@
 {
   "name": "github-starcounter",
-  "version": "1.0.19",
+  "version": "1.1.0",
   "description": "Give a shout-out to your Stargazers and proudly display their support",
   "main": "build/index.js",
+  "types": "build/types/index.d.ts",
   "scripts": {
-    "build": "webpack && node scripts/afterBuild.js",
-    "test": "jest",
+    "start": "webpack serve --config webpack.config.demo.js",
+    "build": "webpack && tsc",
+    "build:demo": "webpack --config webpack.config.demo.js",
+    "build:docs": "webpack --config webpack.config.docs.js",
+    "test": "jest --silent",
+    "coverage": "npm run test -- --coverage",
     "prepare": "npm run build",
     "trypublish": "npm publish || true"
   },
@@ -25,36 +30,54 @@
     "es6"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/polyfill": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/plugin-transform-typescript": "^7.16.8",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.16.11",
+    "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.2.3",
     "babel-preset-minify": "^0.5.0",
-    "css-loader": "^4.3.0",
-    "eslint": "^7.11.0",
-    "file-loader": "^6.1.1",
-    "fs-extra": "^9.0.1",
-    "jest": "^26.5.2",
-    "prettier": "^2.1.2",
+    "copy-webpack-plugin": "^10.2.4",
+    "core-js": "^3.20.3",
+    "css-loader": "^6.5.1",
+    "eslint": "^7.32.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^27.4.7",
+    "mini-css-extract-plugin": "^2.5.3",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
+    "prettier": "^2.5.1",
     "prettier-webpack-plugin": "^1.2.0",
-    "style-loader": "^2.0.0",
-    "terser-webpack-plugin": "^4.2.3",
-    "uglifyjs-webpack-plugin": "^2.2.0",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.1",
+    "typescript": "^4.5.5",
     "url-loader": "^4.1.1",
-    "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.11.2"
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "4.7.3"
   },
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/scripts/testMock.js",
       "\\.(css|less)$": "<rootDir>/scripts/testMock.js"
-    }
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ]
   }
 }

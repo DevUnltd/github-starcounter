@@ -1,6 +1,39 @@
 import "./index.css";
 
-class Starcounter {
+interface StarcounterInterface {
+  showBtn: boolean;
+  showStargazers: boolean;
+  showButtonCount: boolean;
+  user: string;
+  repo: string;
+  theme: string;
+  nbItems: number;
+}
+
+interface StarcounterParams {
+  showBtn: string;
+  showStargazers: string;
+  showButtonCount: string;
+  user: string;
+  repo: string;
+  theme: string;
+  nbItems: number;
+}
+
+class Starcounter implements StarcounterInterface {
+  showBtn;
+  showStargazers;
+  showButtonCount;
+  user;
+  repo;
+  theme;
+  nbItems;
+  wrapperElem;
+  endpoint;
+  stargazersUrl;
+  repoUrl;
+  stargazers_count: number;
+
   constructor({
     showBtn,
     showStargazers,
@@ -9,7 +42,7 @@ class Starcounter {
     repo,
     theme,
     nbItems = 3,
-  }) {
+  }: Partial<StarcounterParams>) {
     this.user = user;
     this.repo = repo;
     this.showBtn = showBtn === "false" ? false : true;
@@ -53,7 +86,7 @@ class Starcounter {
     }
 
     //if (this.showStargazers || this.showButtonCount) {
-    const { stargazers_count } = await this.getApi();
+    const { stargazers_count } = (await this.getApi()) as any;
     this.stargazers_count = stargazers_count;
     //}
 

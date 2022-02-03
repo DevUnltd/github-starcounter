@@ -1,9 +1,11 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const PrettierPlugin = require("prettier-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const getPackageJson = require('./scripts/getPackageJson');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const {
   version,
@@ -26,10 +28,10 @@ const banner = `
 module.exports = {
   mode: "production",
   devtool: 'source-map',
-  entry: './src/lib/index.ts',
+  entry: './src/demo/index.ts',
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'docs'),
     library: "Starcounter",
     libraryTarget: 'umd',
     clean: true
@@ -59,12 +61,27 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
-      },
+      }
     ]
   },
   plugins: [
     new PrettierPlugin(),
-    new webpack.BannerPlugin(banner)
+    new webpack.BannerPlugin(banner),
+    new CopyPlugin({
+      patterns: [
+        { from: "./public", to: "./" },
+      ],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "./templates/index.html",
+      inject: false
+    }),
+    new HtmlWebpackPlugin({
+      filename: "badge.html",
+      template: "./templates/badge.html",
+      inject: false
+    }),
   ],
   resolve: {
     extensions: ['.ts', '.js', '.json']
