@@ -7,6 +7,7 @@ interface StarcounterInterface {
     repo: string;
     theme: string;
     nbItems: number;
+    goalStep: number;
 }
 interface StarcounterParams {
     showBtn: string;
@@ -16,6 +17,7 @@ interface StarcounterParams {
     repo: string;
     theme: string;
     nbItems: number;
+    goalStep: number;
 }
 declare class Starcounter implements StarcounterInterface {
     showBtn: boolean;
@@ -26,14 +28,18 @@ declare class Starcounter implements StarcounterInterface {
     theme: string;
     nbItems: number;
     wrapperElem: Element;
+    mainSection: HTMLDivElement;
+    secondarySection: HTMLDivElement;
     endpoint: string;
     stargazersUrl: string;
     repoUrl: string;
     stargazers_count: number;
-    constructor({ showBtn, showStargazers, showButtonCount, user, repo, theme, nbItems, }: Partial<StarcounterParams>);
+    goalStep: number;
+    constructor({ showBtn, showStargazers, showButtonCount, user, repo, theme, nbItems, goalStep, }: Partial<StarcounterParams>);
     getApi: (path?: string) => Promise<unknown>;
     render: () => Promise<void>;
     renderButton: () => void;
     renderStargazers: () => Promise<void>;
+    renderGoalStep: () => void;
 }
 export default Starcounter;
