@@ -238,7 +238,7 @@ class Starcounter implements StarcounterInterface {
 
     const goalText = document.createElement("div");
     goalText.className = "du-goal-text";
-    goalText.innerHTML = `<b>Goal:</b> ${this.stargazers_count.toLocaleString(
+    goalText.innerHTML = `<b>Goal:</b> ⭐${this.stargazers_count.toLocaleString(
       "en-US"
     )} / ${nextTarget.toLocaleString("en-US")} (${percentageComplete}%)`;
 
