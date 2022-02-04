@@ -221,8 +221,10 @@ class Starcounter implements StarcounterInterface {
       (this.stargazers_count * 100) / nextTarget
     );
 
-    const goalWrapper = document.createElement("div");
+    const goalWrapper = document.createElement("a");
     goalWrapper.className = "du-goal-wrapper";
+    goalWrapper.setAttribute("target", "_blank");
+    goalWrapper.setAttribute("href", this.stargazersUrl);
 
     const goalContainer = document.createElement("div");
     goalContainer.className = "du-goal-container";

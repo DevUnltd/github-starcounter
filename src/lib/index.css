@@ -106,6 +106,17 @@
 /**
  * Goals
  */
+.du-goal-wrapper {
+  opacity: 0.8;
+  cursor: pointer;
+  transition: 0.3s opacity ease-in-out;
+  text-decoration: none;
+  color: inherit;
+}
+
+.du-goal-wrapper:hover {
+  opacity: 1;
+}
 
 .du-goal-current {
   height: 100%;
