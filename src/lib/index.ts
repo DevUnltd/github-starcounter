@@ -8,6 +8,7 @@ interface StarcounterInterface {
   repo: string;
   theme: string;
   nbItems: number;
+  goalStep: number;
 }
 
 interface StarcounterParams {
@@ -18,6 +19,7 @@ interface StarcounterParams {
   repo: string;
   theme: string;
   nbItems: number;
+  goalStep: number;
 }
 
 class Starcounter implements StarcounterInterface {
@@ -29,10 +31,13 @@ class Starcounter implements StarcounterInterface {
   theme;
   nbItems;
   wrapperElem;
+  mainSection;
+  secondarySection;
   endpoint;
   stargazersUrl;
   repoUrl;
   stargazers_count: number;
+  goalStep: number;
 
   constructor({
     showBtn,
@@ -42,6 +47,7 @@ class Starcounter implements StarcounterInterface {
     repo,
     theme,
     nbItems = 3,
+    goalStep = 0,
   }: Partial<StarcounterParams>) {
     this.user = user;
     this.repo = repo;
@@ -50,11 +56,23 @@ class Starcounter implements StarcounterInterface {
     this.showButtonCount = showButtonCount === "true";
     this.theme = theme;
     this.nbItems = nbItems > 0 && nbItems < 50 ? nbItems : 3;
+    this.goalStep = goalStep || 0;
 
-    this.wrapperElem = document.querySelector(".github-starcounter");
     this.endpoint = `https://api.github.com/repos/${this.user}/${this.repo}`;
     this.stargazersUrl = `https://github.com/${this.user}/${this.repo}/stargazers`;
     this.repoUrl = `https://github.com/${this.user}/${this.repo}`;
+
+    this.wrapperElem = document.querySelector(".github-starcounter");
+
+    this.mainSection = document.createElement("div");
+    this.mainSection.className = "du-main-section";
+
+    this.secondarySection = document.createElement("div");
+    this.secondarySection.className = "du-secondary-section";
+
+    this.wrapperElem.appendChild(this.mainSection);
+    this.wrapperElem.appendChild(this.secondarySection);
+
     this.render();
   }
 
@@ -82,7 +100,7 @@ class Starcounter implements StarcounterInterface {
 
   render = async () => {
     if (this.theme) {
-      this.wrapperElem.classList.add("du-theme-" + this.theme);
+      this.mainSection.classList.add("du-theme-" + this.theme);
     }
 
     //if (this.showStargazers || this.showButtonCount) {
@@ -96,6 +114,10 @@ class Starcounter implements StarcounterInterface {
 
     if (this.showStargazers) {
       this.renderStargazers();
+    }
+
+    if (this.goalStep) {
+      this.renderGoalStep();
     }
   };
 
@@ -120,7 +142,7 @@ class Starcounter implements StarcounterInterface {
       buttonElem.innerHTML = "Star";
     }
 
-    this.wrapperElem.appendChild(buttonElem);
+    this.mainSection.appendChild(buttonElem);
   };
 
   renderStargazers = async () => {
@@ -180,7 +202,47 @@ class Starcounter implements StarcounterInterface {
     }
 
     stargazersElem.appendChild(stargazersTextElem);
-    this.wrapperElem.appendChild(stargazersElem);
+    this.mainSection.appendChild(stargazersElem);
+  };
+
+  renderGoalStep = () => {
+    if (!this.stargazers_count) {
+      return;
+    }
+
+    let nextTarget =
+      Math.floor(this.stargazers_count / this.goalStep) * this.goalStep;
+
+    if (nextTarget % this.goalStep === 0) {
+      nextTarget += this.goalStep;
+    }
+
+    const percentageComplete = Math.floor(
+      (this.stargazers_count * 100) / nextTarget
+    );
+
+    const goalWrapper = document.createElement("div");
+    goalWrapper.className = "du-goal-wrapper";
+
+    const goalContainer = document.createElement("div");
+    goalContainer.className = "du-goal-container";
+
+    const goalCurrent = document.createElement("div");
+    goalCurrent.className = "du-goal-current";
+    goalCurrent.style.width = percentageComplete + "%";
+
+    goalContainer.appendChild(goalCurrent);
+    goalWrapper.appendChild(goalContainer);
+
+    const goalText = document.createElement("div");
+    goalText.className = "du-goal-text";
+    goalText.innerHTML = `<b>Goal:</b> ${this.stargazers_count.toLocaleString(
+      "en-US"
+    )} / ${nextTarget.toLocaleString("en-US")} (${percentageComplete}%)`;
+
+    goalWrapper.appendChild(goalText);
+
+    this.secondarySection.appendChild(goalWrapper);
   };
 }
 

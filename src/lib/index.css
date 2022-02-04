@@ -2,7 +2,7 @@
   font-family: sans-serif;
 }
 
-.github-starcounter .du-button {
+.github-starcounter .du-main-section .du-button {
   background: url("images/github-icon.png") no-repeat 15px center;
   height: 45px;
   box-sizing: border-box;
@@ -19,21 +19,21 @@
   transition: opacity 0.2s ease-in-out;
 }
 
-.github-starcounter .du-button:hover {
+.github-starcounter .du-main-section .du-button:hover {
   opacity: 0.5;
 }
 
-.github-starcounter .du-stargazers {
+.github-starcounter .du-main-section .du-stargazers {
   display: flex;
   align-items: center;
   margin-top: 10px;
 }
 
-.github-starcounter .du-stargazer-container {
+.github-starcounter .du-main-section .du-stargazer-container {
   margin-right: 10px;
 }
 
-.github-starcounter .du-stargazer {
+.github-starcounter .du-main-section .du-stargazer {
   height: 30px;
   width: 30px;
   display: inline-block;
@@ -45,7 +45,7 @@
   position: relative;
 }
 
-.github-starcounter .du-stargazer:nth-child(n + 2) {
+.github-starcounter .du-main-section .du-stargazer:nth-child(n + 2) {
   margin-left: -10px;
 }
 
@@ -55,16 +55,19 @@
   margin-left: -5px !important;
 }
 
-.github-starcounter .du-stargazer-container:hover .du-stargazer {
+.github-starcounter
+  .du-main-section
+  .du-stargazer-container:hover
+  .du-stargazer {
   opacity: 0.8;
 }
 
-.github-starcounter .du-stargazer:hover {
+.github-starcounter .du-main-section .du-stargazer:hover {
   opacity: 1 !important;
   z-index: 5;
 }
 
-.github-starcounter span.du-count-span {
+.github-starcounter .du-main-section span.du-count-span {
   border-left: 1px solid #c5c5c5;
   margin-left: 10px;
   padding-left: 10px;
@@ -73,18 +76,50 @@
 /**
  * Theme: Inline
  */
-.github-starcounter.du-theme-inline {
+.github-starcounter .du-main-section.du-theme-inline {
   align-items: center;
   display: flex;
 }
 
-.github-starcounter.du-theme-inline .du-stargazer-container + div {
+.github-starcounter
+  .du-main-section.du-theme-inline
+  .du-stargazer-container
+  + div {
   display: none;
 }
 
-.github-starcounter.du-theme-inline .du-stargazers {
+.github-starcounter .du-main-section.du-theme-inline .du-stargazers {
   margin-top: 0;
   margin-left: 8px;
+}
+
+.github-starcounter .du-goal-container {
+  background: #f3f3f3;
+  height: 10px;
+  max-width: 240px;
+  border-radius: 10px;
+  margin-top: 10px;
+  overflow: hidden;
+  border: 1px solid #e9e9e9;
+}
+
+/**
+ * Goals
+ */
+
+.du-goal-current {
+  height: 100%;
+  background: rgb(156, 228, 111);
+  background: radial-gradient(
+    circle,
+    rgba(156, 228, 111, 1) 0%,
+    rgba(123, 219, 61, 1) 100%
+  );
+}
+
+.du-goal-text {
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 /** **/

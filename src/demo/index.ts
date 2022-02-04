@@ -8,6 +8,7 @@ const showStargazers = urlParams.get("stargazers");
 const showButtonCount = urlParams.get("buttoncount");
 const theme = urlParams.get("theme");
 const nbItems = parseFloat(urlParams.get("nbitems"));
+const goalStep = parseFloat(urlParams.get("goalstep"));
 
 new Starcounter({
   user,
@@ -17,4 +18,5 @@ new Starcounter({
   theme,
   showButtonCount,
   nbItems,
+  goalStep,
 });
