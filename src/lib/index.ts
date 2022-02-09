@@ -262,7 +262,7 @@ class Starcounter implements StarcounterInterface {
       this.goalStep
     } - ${currentCount.toLocaleString("en-US")} / ${nextTarget.toLocaleString(
       "en-US"
-    )} (${percentageComplete}%)`;
+    )} ${percentageComplete ? `(${percentageComplete}%)` : ""}`;
 
     goalWrapper.appendChild(goalText);
 
