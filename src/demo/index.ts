@@ -20,5 +20,5 @@ new Starcounter({
   showButtonCount,
   nbItems,
   goalStep,
-  goalDiff
+  goalDiff,
 });
