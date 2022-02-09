@@ -50,7 +50,7 @@ class Starcounter implements StarcounterInterface {
     theme,
     nbItems = 3,
     goalStep = 0,
-    goalDiff
+    goalDiff,
   }: Partial<StarcounterParams>) {
     this.user = user;
     this.repo = repo;
@@ -215,7 +215,8 @@ class Starcounter implements StarcounterInterface {
     }
 
     const currentCount = this.stargazers_count;
-    const flooredCount = Math.floor(currentCount / this.goalStep) * this.goalStep;
+    const flooredCount =
+      Math.floor(currentCount / this.goalStep) * this.goalStep;
 
     let nextTarget = flooredCount;
 
@@ -225,21 +226,19 @@ class Starcounter implements StarcounterInterface {
 
     let currentCountDiff;
     let nextTargetDiff;
-    if(this.goalDiff){
+    if (this.goalDiff) {
       currentCountDiff = this.stargazers_count - flooredCount;
       nextTargetDiff = this.goalStep;
     }
 
     let percentageComplete;
 
-    if(this.goalDiff){
+    if (this.goalDiff) {
       percentageComplete = Math.floor(
         (currentCountDiff * 100) / nextTargetDiff
       );
     } else {
-      percentageComplete = Math.floor(
-        (currentCount * 100) / nextTarget
-      );
+      percentageComplete = Math.floor((currentCount * 100) / nextTarget);
     }
 
     const goalWrapper = document.createElement("a");
@@ -259,9 +258,11 @@ class Starcounter implements StarcounterInterface {
 
     const goalText = document.createElement("div");
     goalText.className = "du-goal-text";
-    goalText.innerHTML = `<b>Goal:</b> ⭐${this.goalStep} - ${currentCount.toLocaleString(
+    goalText.innerHTML = `<b>Goal:</b> ⭐${
+      this.goalStep
+    } - ${currentCount.toLocaleString("en-US")} / ${nextTarget.toLocaleString(
       "en-US"
-    )} / ${nextTarget.toLocaleString("en-US")} (${percentageComplete}%)`;
+    )} (${percentageComplete}%)`;
 
     goalWrapper.appendChild(goalText);
 
