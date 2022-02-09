@@ -251,7 +251,7 @@ class Starcounter implements StarcounterInterface {
 
     const goalCurrent = document.createElement("div");
     goalCurrent.className = "du-goal-current";
-    goalCurrent.style.width = percentageComplete + "%";
+    goalCurrent.style.width = (percentageComplete || 2) + "%";
 
     goalContainer.appendChild(goalCurrent);
     goalWrapper.appendChild(goalContainer);
