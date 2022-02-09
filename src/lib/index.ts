@@ -20,6 +20,7 @@ interface StarcounterParams {
   theme: string;
   nbItems: number;
   goalStep: number;
+  goalDiff: string;
 }
 
 class Starcounter implements StarcounterInterface {
@@ -38,6 +39,7 @@ class Starcounter implements StarcounterInterface {
   repoUrl;
   stargazers_count: number;
   goalStep: number;
+  goalDiff;
 
   constructor({
     showBtn,
@@ -48,6 +50,7 @@ class Starcounter implements StarcounterInterface {
     theme,
     nbItems = 3,
     goalStep = 0,
+    goalDiff
   }: Partial<StarcounterParams>) {
     this.user = user;
     this.repo = repo;
@@ -57,6 +60,7 @@ class Starcounter implements StarcounterInterface {
     this.theme = theme;
     this.nbItems = nbItems > 0 && nbItems < 50 ? nbItems : 3;
     this.goalStep = goalStep || 0;
+    this.goalDiff = goalDiff === "true";
 
     this.endpoint = `https://api.github.com/repos/${this.user}/${this.repo}`;
     this.stargazersUrl = `https://github.com/${this.user}/${this.repo}/stargazers`;
@@ -210,16 +214,33 @@ class Starcounter implements StarcounterInterface {
       return;
     }
 
-    let nextTarget =
-      Math.floor(this.stargazers_count / this.goalStep) * this.goalStep;
+    const currentCount = this.stargazers_count;
+    const flooredCount = Math.floor(currentCount / this.goalStep) * this.goalStep;
+
+    let nextTarget = flooredCount;
 
     if (nextTarget % this.goalStep === 0) {
       nextTarget += this.goalStep;
     }
 
-    const percentageComplete = Math.floor(
-      (this.stargazers_count * 100) / nextTarget
-    );
+    let currentCountDiff;
+    let nextTargetDiff;
+    if(this.goalDiff){
+      currentCountDiff = this.stargazers_count - flooredCount;
+      nextTargetDiff = this.goalStep;
+    }
+
+    let percentageComplete;
+
+    if(this.goalDiff){
+      percentageComplete = Math.floor(
+        (currentCountDiff * 100) / nextTargetDiff
+      );
+    } else {
+      percentageComplete = Math.floor(
+        (currentCount * 100) / nextTarget
+      );
+    }
 
     const goalWrapper = document.createElement("a");
     goalWrapper.className = "du-goal-wrapper";
@@ -238,7 +259,7 @@ class Starcounter implements StarcounterInterface {
 
     const goalText = document.createElement("div");
     goalText.className = "du-goal-text";
-    goalText.innerHTML = `<b>Goal:</b> ⭐${this.stargazers_count.toLocaleString(
+    goalText.innerHTML = `<b>Goal:</b> ⭐${this.goalStep} - ${currentCount.toLocaleString(
       "en-US"
     )} / ${nextTarget.toLocaleString("en-US")} (${percentageComplete}%)`;
 
