@@ -258,11 +258,13 @@ class Starcounter implements StarcounterInterface {
 
     const goalText = document.createElement("div");
     goalText.className = "du-goal-text";
-    goalText.innerHTML = `<b>Goal:</b> ⭐${
+    goalText.innerHTML = `<b>Goal:</b> <span class="du-goal-step-text">${
       this.goalStep
-    } - ${currentCount.toLocaleString("en-US")} / ${nextTarget.toLocaleString(
+    }</span> ${currentCount.toLocaleString(
       "en-US"
-    )} ${percentageComplete ? `(${percentageComplete}%)` : ""}`;
+    )} / ${nextTarget.toLocaleString("en-US")} ${
+      percentageComplete ? `(${percentageComplete}%)` : ""
+    }`;
 
     goalWrapper.appendChild(goalText);
 
