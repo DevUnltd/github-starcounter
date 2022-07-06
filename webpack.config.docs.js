@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const PrettierPlugin = require("prettier-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const getPackageJson = require('./scripts/getPackageJson');
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 const {
@@ -40,13 +40,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({ extractComments: false }),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: {
-          map: {
-            inline: false
-          }
-        }
-      })
+      new CssMinimizerPlugin()
     ],
   },
   module: {
