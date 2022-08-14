@@ -135,9 +135,9 @@
 
 .du-goal-step-text {
   border-radius: 5px;
-  border: 1px solid #00000024;
+  border-bottom: 1px solid #00000024;
   background: url("images/star.png") no-repeat 4px center;
-  background-color: rgb(239 224 21 / 32%);
+  background-color: rgb(255 198 0 / 51%);
   background-size: 10px;
   padding: 2px 5px 2px 17px;
   font-size: 11px;
