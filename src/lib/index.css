@@ -13,7 +13,9 @@
   align-items: center;
   border-radius: 20px;
   font-size: 21px;
-  border: 1px solid #c5c5c5;
+  padding-top: 3px;
+  border: 1px solid #6a6a6a;
+  border-bottom: 3px solid #696969;
   text-decoration: none;
   color: black;
   transition: opacity 0.2s ease-in-out;
@@ -31,6 +33,9 @@
 
 .github-starcounter .du-main-section .du-stargazer-container {
   margin-right: 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .github-starcounter .du-main-section .du-stargazer {
@@ -65,6 +70,10 @@
 .github-starcounter .du-main-section .du-stargazer:hover {
   opacity: 1 !important;
   z-index: 5;
+  position: relative;
+  transform: scale(1.15);
+  border: 2px solid black;
+  background-size: cover;
 }
 
 .github-starcounter .du-main-section span.du-count-span {
@@ -91,6 +100,7 @@
 .github-starcounter .du-main-section.du-theme-inline .du-stargazers {
   margin-top: 0;
   margin-left: 8px;
+  height: 45px;
 }
 
 .github-starcounter .du-goal-container {
